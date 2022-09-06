@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "505766449047",
+    "project_id": "onewday-13149",
+    "storage_bucket": "onewday-13149.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:505766449047:android:b951e062f87d63d05efed2",
+        "android_client_info": {
+          "package_name": "com.onew.onewday"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "505766449047-43kgur1h4608n158qrfihv0hhf0jgkjd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD4HsbZJ5ygzhL1RMbVmHXtB8ehWbKXUQo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "505766449047-43kgur1h4608n158qrfihv0hhf0jgkjd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

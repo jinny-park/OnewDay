@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/diaryList"
+        android:icon="@drawable/nav1"
+        android:title="일상조각"
+        app:cnb_iconColor="@color/navigation_list"/>
+    <item
+        android:id="@+id/diaryWrite"
+        android:icon="@drawable/nav2"
+        android:title="일기쓰기"
+        app:cnb_iconColor="@color/navigation_write" />
+    <item
+        android:id="@+id/quote"
+        android:icon="@drawable/nav3"
+        android:title="명언조각"
+        app:cnb_iconColor="@color/splash"/>
+    <item
+        android:id="@+id/my"
+        android:icon="@drawable/nav4"
+        android:title="나의조각"
+        app:cnb_iconColor="@color/navigation_my" />
+</menu>
