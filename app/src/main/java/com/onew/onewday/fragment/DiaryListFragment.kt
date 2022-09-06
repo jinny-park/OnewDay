@@ -48,10 +48,10 @@ class DiaryListFragment : Fragment() {
         recyclerView.layoutManager = viewManager
         viewAdapter = DiaryListAdapter(dataList)
 
-        dataList.add(DiaryModel("2022.09.04","오늘의 일기","이거 진짜 말 줄임표 기능 되려나? 그렇게 설정해두긴 했는데 잘 모르겠다. "))
-        dataList.add(DiaryModel("2022.09.03","추운 일기","떡볶이 맛있긴 한데 다른것도 먹고싶다. 예를들어서 라면 맛있다."))
-        dataList.add(DiaryModel("2022.09.02","테스트 일기","떡볶이 맛있다."))
-        dataList.add(DiaryModel("2022.09.01","타코야끼","한강믈 온도 api 써야하나 말아야하나 고민이군"))
+        dataList.add(DiaryModel("2022.09.04","이거 진짜 말 줄임표 기능 되려나? 그렇게 설정해두긴 했는데 잘 모르겠다. "))
+        dataList.add(DiaryModel("2022.09.03","떡볶이 맛있긴 한데 다른것도 먹고싶다. 예를들어서 라면 맛있다."))
+        dataList.add(DiaryModel("2022.09.02","떡볶이 맛있다."))
+        dataList.add(DiaryModel("2022.09.01","한강믈 온도 api 써야하나 말아야하나 고민이군"))
 
         if(dataList.isEmpty()){
             binding.bookmarkLayout.visibility = View.VISIBLE

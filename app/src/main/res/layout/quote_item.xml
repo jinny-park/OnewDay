@@ -6,7 +6,7 @@
     android:id="@+id/card_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="5dp"
+    android:layout_margin="3dp"
     card_view:cardBackgroundColor="@color/card"
     card_view:cardCornerRadius="20dp"
     card_view:contentPadding="4dp">
@@ -31,25 +31,14 @@
             android:layout_marginRight="16dp"
             android:src="@drawable/nav3" />
 
-
-        <TextView
-            android:id="@+id/title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toEndOf="@+id/item_image"
-            android:layout_toRightOf="@+id/item_image"
-            android:textSize="17sp"
-            android:textColor="@color/splash"
-            android:text="명언조각" />
         <TextView
             android:id="@+id/quote"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/title"
+            android:layout_toStartOf="@+id/addQuote"
             android:layout_toEndOf="@+id/item_image"
-            android:layout_toRightOf="@+id/item_image"
-            android:textSize="15sp"
-            android:text="" />
+            android:text="dfdfadfsdf"
+            android:textSize="15sp" />
 
         <ImageView
             android:id="@+id/addQuote"
@@ -61,7 +50,7 @@
             android:layout_marginEnd="0.5dp"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:clickable="true"
-            android:src="@drawable/bookmark"/>
+            android:src="@drawable/bookmark" />
 
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

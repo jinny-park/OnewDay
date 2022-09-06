@@ -12,7 +12,6 @@ class DiaryListAdapter (private val dataSet: MutableList<DiaryModel>): RecyclerV
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var itemDate: TextView = itemView.findViewById(R.id.date)
-        var itemtitle: TextView = itemView.findViewById(R.id.title)
         var itemdetail: TextView = itemView.findViewById(R.id.content)
     }
 
@@ -28,7 +27,6 @@ class DiaryListAdapter (private val dataSet: MutableList<DiaryModel>): RecyclerV
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
         holder.itemDate.setText(dataSet.get(position).date)
-        holder.itemtitle.setText(dataSet.get(position).title)
         holder.itemdetail.setText(dataSet.get(position).content)
     }
 
