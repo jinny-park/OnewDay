@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.JsonArray
@@ -22,6 +23,8 @@ import com.onew.onewday.databinding.FragmentDiaryListBinding
 import com.onew.onewday.databinding.FragmentQuoteBinding
 import com.onew.onewday.quote.QuoteMarkListAdapter
 import com.onew.onewday.quote.QuoteModel
+import com.onew.onewday.quote.QuoteRepository
+import com.onew.onewday.quote.QuoteViewModel
 import com.onew.onewday.retrofit.RetrofitApi
 import org.json.JSONArray
 import org.json.JSONTokener
@@ -39,8 +42,9 @@ class QuoteFragment : Fragment() {
     private lateinit var viewAdapter: RecyclerView.Adapter<*>
     private lateinit var viewManager: RecyclerView.LayoutManager
     private val dataList = mutableListOf<QuoteModel>()
-
+    private lateinit var viewModel: QuoteViewModel
     private lateinit var recyclerView: RecyclerView
+    private lateinit var repository: QuoteRepository
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -76,33 +80,44 @@ class QuoteFragment : Fragment() {
         if(dataList.isEmpty()){
             binding.bookmarkLayout.visibility = View.VISIBLE
         }
+        repository = QuoteRepository()
+        viewModel = QuoteViewModel(repository)
+        viewModel.getQuote("guest")
+        viewModel.getQuoteResponse.observe(requireActivity(), Observer {
+            val jsonArray = JSONTokener(it.toString()).nextValue() as JSONArray
+            val quote = jsonArray.getJSONObject(1).getString("respond")
+            quoteText.text = quote
+            Log.d("QuoteFragment", quote);
+        }
 
-        val retrofit = Retrofit.Builder().baseUrl(BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create()).build();
-        val service = retrofit.create(RetrofitApi::class.java)
+        )
 
-        service.getQuote("guest").enqueue(object : Callback<JsonArray> {
-            override fun onResponse(call: Call<JsonArray>, response: Response<JsonArray>) {
-                if(response.isSuccessful){
-                    // 정상적으로 통신이 성고된 경우
-                    val jsonArray = JSONTokener(response.body().toString()).nextValue() as JSONArray
-                    val quote = jsonArray.getJSONObject(1).getString("respond")
-                    setQuote(quote)
-                    Log.d("quoteText.GetText",quoteText.text.toString())
+//        val retrofit = Retrofit.Builder().baseUrl(BASE_URL)
+//            .addConverterFactory(GsonConverterFactory.create()).build();
+//        val service = retrofit.create(RetrofitApi::class.java)
 
-                    Log.d("QuoteFragment", response.body().toString());
-                    Log.d("QuoteFragment", quote);
-
-                }else{
-                    Log.d("QuoteFragment",response.message());
-                }
-            }
-
-            override fun onFailure(call: Call<JsonArray>, t: Throwable) {
-                // 통신 실패 (인터넷 끊킴, 예외 발생 등 시스템적인 이유)
-                Log.d("YMC", "onFailure 에러: " + t.message.toString());
-            }
-        })
+//        service.getQuote("guest").enqueue(object : Callback<JsonArray> {
+//            override fun onResponse(call: Call<JsonArray>, response: Response<JsonArray>) {
+//                if(response.isSuccessful){
+//                    // 정상적으로 통신이 성고된 경우
+//                    val jsonArray = JSONTokener(response.body().toString()).nextValue() as JSONArray
+//                    val quote = jsonArray.getJSONObject(1).getString("respond")
+//                    setQuote(quote)
+//                    Log.d("quoteText.GetText",quoteText.text.toString())
+//
+//                    Log.d("QuoteFragment", response.body().toString());
+//                    Log.d("QuoteFragment", quote);
+//
+//                }else{
+//                    Log.d("QuoteFragment",response.message());
+//                }
+//            }
+//
+//            override fun onFailure(call: Call<JsonArray>, t: Throwable) {
+//                // 통신 실패 (인터넷 끊킴, 예외 발생 등 시스템적인 이유)
+//                Log.d("YMC", "onFailure 에러: " + t.message.toString());
+//            }
+//        })
 
 
         return view
