@@ -39,4 +39,8 @@
 
 
     </style>
+
+    <style name="AppTheme.NumberPicker" parent="Theme.AppCompat.Light">
+        <item name="colorControlNormal">@color/calendar</item>
+    </style>
 </resources>

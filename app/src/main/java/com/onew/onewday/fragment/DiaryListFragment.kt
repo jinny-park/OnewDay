@@ -48,10 +48,7 @@ class DiaryListFragment : Fragment() {
         recyclerView.layoutManager = viewManager
         viewAdapter = DiaryListAdapter(dataList)
 
-        dataList.add(DiaryModel("2022.09.04","이거 진짜 말 줄임표 기능 되려나? 그렇게 설정해두긴 했는데 잘 모르겠다. "))
-        dataList.add(DiaryModel("2022.09.03","떡볶이 맛있긴 한데 다른것도 먹고싶다. 예를들어서 라면 맛있다."))
-        dataList.add(DiaryModel("2022.09.02","떡볶이 맛있다."))
-        dataList.add(DiaryModel("2022.09.01","한강믈 온도 api 써야하나 말아야하나 고민이군"))
+        dataList.add(DiaryModel("2022.9.10","이거 진짜 말 줄임표 기능 되려나? 그렇게 설정해두긴 했는데 잘 모르겠다.떡볶이 맛있긴 한데 다른것도 먹고싶다. 예를들어서 라면 맛있다.한강믈 온도 api 써야하나 말아야하나 고민이군.떡볶이 맛있다. 길게 일기 써서 테스팅 해야하는데 고민이군 쓸말이 없어."))
 
         if(dataList.isEmpty()){
             binding.bookmarkLayout.visibility = View.VISIBLE
@@ -67,9 +64,10 @@ class DiaryListFragment : Fragment() {
                 val day: Day? = collapsibleCalendar.selectedDay
 //                val day: Day = viewCalendar.getSelectedDay()
                 if (day != null) {
+
                     Log.i(
                         javaClass.name, "Selected Day: "
-                                + day.year + "/" + (day.month + 1) + "/" + day.day
+                                + day.year + "." + (day.month + 1) + "." + day.day
                     )
                 }
             }

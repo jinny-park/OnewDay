@@ -1,60 +1,91 @@
 package com.onew.onewday.fragment
 
+import android.icu.util.Calendar
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.NumberPicker
+import androidx.appcompat.app.AlertDialog
 import com.onew.onewday.R
+import com.onew.onewday.databinding.FragmentDiaryWriteBinding
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [DiaryWriteFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class DiaryWriteFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private lateinit var binding: FragmentDiaryWriteBinding
+    private val c: Calendar = Calendar.getInstance()
+    private val d = c.get(Calendar.DAY_OF_MONTH)
+    private val m = c.get(Calendar.MONTH)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_diary_write, container, false)
+
+        val view = inflater.inflate(R.layout.fragment_diary_write, container, false)
+        binding = FragmentDiaryWriteBinding.bind(view)
+        binding.month.text = (m+1).toString()
+        binding.day.text = d.toString()
+
+        binding.datePick.setOnClickListener {
+            datePickerDialog()
+        }
+
+
+        return view
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment DiaryWriteFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            DiaryWriteFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    private fun datePickerDialog(){
+        val dialog = AlertDialog.Builder(requireContext()).create()
+        val edialog : LayoutInflater = LayoutInflater.from(context)
+        val mView : View = edialog.inflate(R.layout.custom_datepicker,null)
+
+        val month : NumberPicker = mView.findViewById(R.id.monthpicker_datepicker)
+        val day : NumberPicker = mView.findViewById(R.id.daypicker_datepicker)
+        val cancel : Button = mView.findViewById(R.id.cancel_button)
+        val save : Button = mView.findViewById(R.id.ok_button)
+
+        //  editText 설정 해제
+        month.descendantFocusability = NumberPicker.FOCUS_BLOCK_DESCENDANTS
+        day.descendantFocusability = NumberPicker.FOCUS_BLOCK_DESCENDANTS
+
+        //  최소값 설정
+        month.minValue = 1
+        day.minValue=1
+
+        //  최대값 설정
+        month.maxValue = 12
+        day.maxValue = 31
+
+        month.value = c.get(Calendar.MONTH)+1
+        day.value = c.get(Calendar.DAY_OF_MONTH)
+
+        //  취소 버튼 클릭 시
+        cancel.setOnClickListener {
+            dialog.dismiss()
+            dialog.cancel()
+        }
+
+        //  완료 버튼 클릭 시
+        save.setOnClickListener {
+            binding.month.text = (month.value).toString()
+            binding.day.text = (day.value).toString()
+
+            dialog.dismiss()
+            dialog.cancel()
+        }
+
+        dialog.setView(mView)
+        dialog.create()
+        dialog.show()
+
+
     }
+
 }

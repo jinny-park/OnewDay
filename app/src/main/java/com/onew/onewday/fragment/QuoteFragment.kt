@@ -72,8 +72,6 @@ class QuoteFragment : Fragment() {
         recyclerView.layoutManager = viewManager
         viewAdapter = QuoteMarkListAdapter(dataList)
         dataList.add(QuoteModel("사람이 여행하는 것은 도착하기 위해서가 아닌 여행하기 위해서다. - 괴테"))
-        dataList.add(QuoteModel("죽고싶지만 떡볶이는 먹고싶어.- 박의진"))
-        dataList.add(QuoteModel("이것은 테스트 명언입니다. - 알파테스트"))
         viewAdapter.notifyDataSetChanged()
         recyclerView.adapter = viewAdapter
 
